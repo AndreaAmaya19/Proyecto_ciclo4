@@ -1,0 +1,15 @@
+type Query {
+    getUsuarios: [usuario]
+    
+  }
+
+  type usuario{
+      _id: ID
+      correo: String!
+      password: String! 
+      identificacion: String!
+      nombre: String!
+      apellido: String!
+      rol: String!
+      estado: String!
+  }

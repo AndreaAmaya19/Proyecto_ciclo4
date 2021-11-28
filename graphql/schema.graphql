@@ -3,13 +3,27 @@ type Query {
     
   }
 
-  type usuario{
-      _id: ID
-      correo: String!
-      password: String! 
-      identificacion: String!
-      nombre: String!
-      apellido: String!
-      rol: String!
-      estado: String!
+type usuario{
+    _id: ID
+    correo: String!
+    password: String! 
+    identificacion: String!
+    nombre: String!
+    apellido: String!
+    rol: String!
+    estado: String!
+  }
+input UsuarioInput{
+    correo: String!
+    password: String! 
+    identificacion: String!
+    nombre: String!
+    apellido: String!
+    rol: String!
+    estado: String
+  }
+
+type Mutation {
+    "crea un usuario"
+    createUsuario(input: UsuarioInput!):usuario
   }

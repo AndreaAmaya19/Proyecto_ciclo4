@@ -1,9 +1,10 @@
 type Query {
-    getUsuarios: [usuario]
+    "muestra todos los usuarios registrados"
+    getUsuarios: [Usuario]
     
   }
 
-type usuario{
+type Usuario{
     _id: ID
     correo: String!
     password: String! 
@@ -22,8 +23,17 @@ input UsuarioInput{
     rol: String!
     estado: String
   }
+  input userEditInput{
+    correo: String
+    password: String 
+    identificacion: String
+    nombre: String
+    apellido: String
+  }
 
 type Mutation {
     "crea un usuario"
-    createUsuario(input: UsuarioInput!):usuario
+    createUsuario(input: UsuarioInput!):Usuario
+    "edita usuario"
+    editUser(_id:ID!, input:userEditInput):Usuario
   }

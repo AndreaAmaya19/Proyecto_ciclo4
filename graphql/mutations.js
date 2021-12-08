@@ -7,7 +7,8 @@ const { ObjectId } = require('mongodb')
 module.exports = {
     createUsuario: async (root, { input }) => {
         const defaults = {
-            estado: "pendiente"
+            estado: "Pendiente",
+            rol: "Usuario"
         }
         const newUser = Object.assign(defaults, input)
         let db

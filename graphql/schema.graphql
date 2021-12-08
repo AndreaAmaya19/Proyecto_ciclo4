@@ -1,3 +1,16 @@
+enum Rol{
+    Lider
+    Estudiante
+    Administrador
+    Usuario
+}
+
+enum EstadoU{
+    Autorizado,
+    NoAutorizado,
+    Pendiente,
+}
+
 type Query {
     "muestra todos los usuarios registrados"
     getUsuarios: [Usuario]
@@ -11,18 +24,20 @@ type Usuario{
     identificacion: String!
     nombre: String!
     apellido: String!
-    rol: String!
-    estado: String!
+    rol: Rol
+    estado: EstadoU
   }
+
 input UsuarioInput{
     correo: String!
     password: String! 
     identificacion: String!
     nombre: String!
     apellido: String!
-    rol: String!
-    estado: String
+    rol: Rol
+    estado: EstadoU
   }
+
   input userEditInput{
     correo: String
     password: String 
@@ -32,8 +47,8 @@ input UsuarioInput{
   }
 
 type Mutation {
-    "crea un usuario"
+    "Crea un usuario"
     createUsuario(input: UsuarioInput!):Usuario
-    "edita usuario"
+    "Edita usuario"
     editUser(_id:ID!, input:userEditInput):Usuario
   }

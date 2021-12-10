@@ -1,54 +1,91 @@
 enum Rol{
-    Lider
-    Estudiante
-    Administrador
-    Usuario
+  Lider
+  Estudiante
+  Administrador
+  Usuario
 }
 
 enum EstadoU{
-    Autorizado,
-    NoAutorizado,
-    Pendiente,
+  Autorizado,
+  NoAutorizado,
+  Pendiente,
+}
+
+enum EstadoP{
+  Activo,
+  Inactivo
+}
+
+enum FaseP{
+  EnDesarrollo,
+  Terminado
 }
 
 type Query {
-    "muestra todos los usuarios registrados"
-    getUsuarios: [Usuario]
-    
+  "muestra todos los usuarios registrados"
+  getUsuarios: [Usuario]
+  "muestra todos los proyectos registrados"
+  getProyectos: [Proyecto]
   }
 
 type Usuario{
-    _id: ID
-    correo: String!
-    password: String! 
-    identificacion: String!
-    nombre: String!
-    apellido: String!
-    rol: Rol
-    estado: EstadoU
-  }
+  _id: ID
+  correo: String!
+  password: String! 
+  identificacion: String!
+  nombre: String!
+  apellido: String!
+  rol: Rol
+  estado: EstadoU
+}
+
+type Proyecto{
+  _id: ID
+  nombre_proyecto: String!
+  estado_proyecto: EstadoP
+  fase: FaseP 
+  objetivos_generales: String!
+  objetivos_especificos: String!
+  presupuesto: Float!
+  avances: String
+  inscritos: [Usuario]
+}
 
 input UsuarioInput{
-    correo: String!
-    password: String! 
-    identificacion: String!
-    nombre: String!
-    apellido: String!
-    rol: Rol
-    estado: EstadoU
-  }
+  correo: String!
+  password: String! 
+  identificacion: String!
+  nombre: String!
+  apellido: String!
+  rol: Rol
+  estado: EstadoU
+}
 
-  input userEditInput{
-    correo: String
-    password: String 
-    identificacion: String
-    nombre: String
-    apellido: String
-  }
+input ProyectoInput{
+  nombre_proyecto: String!
+  estado_proyecto: EstadoP
+  fase: FaseP 
+  objetivos_generales: String!
+  objetivos_especificos: String!
+  presupuesto: Float!
+  avances: String
+}
+
+input userEditInput{
+  correo: String
+  password: String 
+  identificacion: String
+  nombre: String
+  apellido: String
+}
 
 type Mutation {
-    "Crea un usuario"
-    createUsuario(input: UsuarioInput!):Usuario
-    "Edita usuario"
-    editUser(_id:ID!, input:userEditInput):Usuario
-  }
+  "Crea un usuario"
+  createUsuario(input: UsuarioInput!):Usuario
+  "Edita usuario"
+  editUser(_id:ID!, input:userEditInput):Usuario
+  "Crea un proyecto"
+  createProyecto(input: ProyectoInput!):Proyecto
+  "Asigna un usuario a un proyecto"
+  addPeople(proyectoID: ID!, usuarioID: ID!): Proyecto
+}
